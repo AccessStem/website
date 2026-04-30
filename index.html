@@ -51,6 +51,7 @@
   .gear-br { bottom: 4%; right: 4%; }
   .gear-tr { top: 12%; right: 6%; }
   .gear-svg { display: block; }
+  .gear-wrap img.gear-svg { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.35)); }
 
   @keyframes spin-cw  { to { transform: rotate(360deg);  } }
   @keyframes spin-ccw { to { transform: rotate(-360deg); } }
@@ -89,6 +90,9 @@
   }
   .content-section.alt { background: var(--bg2); }
   .section-inner { max-width: 720px; width: 90%; padding: 4rem 2rem; text-align: center; }
+  .mission-card { margin: 1.5rem auto 0; padding: 2rem; max-width: 680px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.18); text-align: left; }
+  .mission-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.12em; color: var(--white); margin-bottom: 1rem; }
+  .mission-card p { color: var(--text); font-size: 1rem; line-height: 1.9; }
   .section-tag { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; color: rgba(42,95,168,0.15); letter-spacing: 0.05em; margin-bottom: 0.25rem; }
   .section-inner h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: 0.1em; color: var(--white); margin-bottom: 1.2rem; }
   .section-inner p { font-size: 1rem; color: var(--text-dim); font-weight: 300; line-height: 1.8; max-width: 540px; margin: 0 auto; }
@@ -120,28 +124,20 @@
   </svg>
 
   <div class="gear-wrap gear-tl">
-    <svg class="gear-svg spin-ccw" width="90" height="90" viewBox="0 0 100 100"><use href="#gear-shape" fill="#152a4e" stroke="#2a5fa8" stroke-width="1.5"/></svg>
-    <svg class="gear-svg spin-cw" width="52" height="52" viewBox="0 0 100 100" style="margin-left:60px;margin-top:-30px"><use href="#gear-shape" fill="#0e1e3a" stroke="#1e4d8c" stroke-width="2"/></svg>
+    <img class="gear-svg spin-ccw" width="90" height="90" src="cog.png" alt="cog" />
+    <img class="gear-svg spin-cw" width="52" height="52" src="cog.png" alt="cog" style="margin-left:60px;margin-top:-30px" />
   </div>
   <div class="gear-wrap gear-tr">
-    <svg class="gear-svg spin-cw" width="68" height="68" viewBox="0 0 100 100"><use href="#gear-shape" fill="#152a4e" stroke="#2a5fa8" stroke-width="1.5"/></svg>
+    <img class="gear-svg spin-cw" width="68" height="68" src="cog.png" alt="cog" />
   </div>
   <div class="gear-wrap gear-bl">
-    <svg class="gear-svg spin-slow" width="110" height="110" viewBox="0 0 100 100"><use href="#gear-shape" fill="#0e1e3a" stroke="#1e4d8c" stroke-width="1.5"/></svg>
-    <svg class="gear-svg spin-ccw" width="58" height="58" viewBox="0 0 100 100" style="margin-left:72px;margin-top:-40px"><use href="#gear-shape" fill="#152a4e" stroke="#2a5fa8" stroke-width="2"/></svg>
+    <img class="gear-svg spin-slow" width="110" height="110" src="cog.png" alt="cog" />
+    <img class="gear-svg spin-ccw" width="58" height="58" src="cog.png" alt="cog" style="margin-left:72px;margin-top:-40px" />
   </div>
   <div class="gear-wrap gear-br">
-    <svg class="gear-svg spin-ccw" width="95" height="95" viewBox="0 0 100 100"><use href="#gear-shape" fill="#152a4e" stroke="#2a5fa8" stroke-width="1.5"/></svg>
-    <svg class="gear-svg spin-cw" width="48" height="48" viewBox="0 0 100 100" style="margin-left:62px;margin-top:-32px"><use href="#gear-shape" fill="#0e1e3a" stroke="#1e4d8c" stroke-width="2"/></svg>
+    <img class="gear-svg spin-ccw" width="95" height="95" src="cog.png" alt="cog" />
+    <img class="gear-svg spin-cw" width="48" height="48" src="cog.png" alt="cog" style="margin-left:62px;margin-top:-32px" />
   </div>
-
-  <svg width="0" height="0" style="position:absolute">
-    <defs>
-      <symbol id="gear-shape" viewBox="0 0 100 100">
-        <path d="M50 5 L55 5 L57 15 Q63 17 68 21 L78 15 L82 19 L76 29 Q80 34 82 40 L92 42 L92 48 L82 50 Q80 56 76 61 L82 71 L78 75 L68 69 Q63 73 57 75 L55 85 L50 85 L45 85 L43 75 Q37 73 32 69 L22 75 L18 71 L24 61 Q20 56 18 50 L8 48 L8 42 L18 40 Q20 34 24 29 L18 19 L22 15 L32 21 Q37 17 43 15 L45 5 Z M50 30 A20 20 0 1 1 50 70 A20 20 0 1 1 50 30Z" fill-rule="evenodd"/>
-      </symbol>
-    </defs>
-  </svg>
 
   <div class="hero-inner">
     <div class="center-gear-wrap">
@@ -164,8 +160,23 @@
 
 <section id="section1" class="content-section">
   <div class="section-inner">
-    <h2>Our Misson</h2>
-    <p>FillerFillerFillerFillerFiller</p>
+    <h2>Our Mission</h2>
+    <div class="mission-card">
+      <h3>What we do</h3>
+      <p>AccessSTEM offers a completely free, one day summer camp which focuses on engaging and hands-on learning about various STEM related topics. We will be hosting a variety of design challenges which prompt students to practise problem solving in the applied sciences.</p>
+    </div>
+    <div class="mission-card">
+      <h3>Who can Apply?</h3>
+      <p>Children in grades 4-5 interested in science</p>
+    </div>
+    <div class="mission-card">
+      <h3>Where is it Hosted?</h3>
+      <p>Gabriel Robins Elementary School</p>
+    </div>
+    <div class="mission-card">
+      <h3>When does it Take Place?</h3>
+      <p>June 30th, 2026</p>
+    </div>
   </div>
 </section>
 
