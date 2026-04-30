@@ -15,20 +15,49 @@
     --text: #d0dff5;
     --text-dim: #6b8ab5;
     --white: #ffffff;
+    --panel: rgba(255,255,255,0.06);
+    --panel-border: rgba(255,255,255,0.08);
+    --nav-bg: rgba(10,22,40,0.88);
+    --nav-border: rgba(42,95,168,0.25);
   }
 
   html { scroll-behavior: smooth; }
 
-  body { width: 100%; overflow-x: hidden; background: var(--bg); color: var(--text); font-family: 'Barlow', sans-serif; }
+  body {
+    width: 100%; overflow-x: hidden; background-color: #07111f; color: var(--text); font-family: 'Barlow', sans-serif;
+    transition: background-color 0.7s ease, color 0.7s ease;
+  }
+
+  .theme-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity 0.8s ease, background-image 0.8s ease;
+  }
+  .theme-layer-base { opacity: 1; }
+  .theme-layer-next { opacity: 0; }
+  .theme-wash {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    transition: opacity 0.8s ease, background-image 0.8s ease;
+  }
 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.1rem 3rem;
-    background: rgba(10,22,40,0.88);
+    background-color: var(--nav-bg);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(42,95,168,0.25);
+    border-bottom: 1px solid var(--nav-border);
+    transition: background-color 0.7s ease, border-color 0.7s ease;
   }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.12em; color: var(--white); }
   .nav-links { display: flex; gap: 0.5rem; }
@@ -42,7 +71,7 @@
   }
 
   /* HERO */
-  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 5rem; }
+  .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; overflow: hidden; padding-top: 5rem; transition: background-color 0.7s ease, color 0.7s ease; }
   .wave-bg { position: absolute; inset: 0; pointer-events: none; }
 
   .gear-wrap { position: absolute; pointer-events: none; transition: transform 0.1s ease-out; }
@@ -79,20 +108,31 @@
   }
   .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.18); }
   .btn-register:active { transform: scale(0.97); }
+  .cta-block h1, .cta-block p, .gear-inner-text .motto1, .section-inner h2, .section-inner p, .mission-card h3, .mission-card p, .info-card h3, .info-card p, .schedule-time, .schedule-item p { transition: color 0.7s ease; }
 
   .hero-inner { display: flex; align-items: center; gap: 5vw; z-index: 2; position: relative; flex-wrap: wrap; justify-content: center; padding: 2rem; }
 
   /* CONTENT SECTIONS */
   .content-section {
-    min-height: 100vh; display: flex; align-items: flex-start; justify-content: center;
-    background: var(--bg); border-top: 1px solid rgba(42,95,168,0.18);
+    min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; position: relative; z-index: 1;
+    background: transparent; border-top: 1px solid rgba(255,255,255,0.08);
     padding-top: 1rem;
+    transition: border-color 0.7s ease;
   }
-  .content-section.alt { background: var(--bg2); }
+  .content-section.alt { background: transparent; }
   .section-inner { max-width: 720px; width: 90%; padding: 4rem 2rem; text-align: center; }
-  .mission-card { margin: 1.5rem auto 0; padding: 2rem; max-width: 680px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.18); text-align: left; }
+  .mission-card { margin: 1.5rem auto 0; padding: 2rem; max-width: 680px; background-color: var(--panel); border: 1px solid var(--panel-border); border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.18); text-align: left; transition: background-color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
   .mission-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.12em; color: var(--white); margin-bottom: 1rem; }
   .mission-card p { color: var(--text); font-size: 1rem; line-height: 1.9; }
+  .card-grid { display: grid; gap: 1rem; margin-top: 1.5rem; }
+  .card-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .info-card { padding: 1.6rem; background-color: var(--panel); border: 1px solid var(--panel-border); border-radius: 20px; box-shadow: 0 18px 40px rgba(0,0,0,0.16); text-align: left; transition: background-color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
+  .info-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.12em; color: var(--white); margin-bottom: 0.75rem; }
+  .info-card p { color: var(--text); font-size: 0.98rem; line-height: 1.8; }
+  .schedule-list { display: grid; gap: 0.85rem; margin-top: 1.5rem; }
+  .schedule-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem 1.4rem; background-color: var(--panel); border: 1px solid var(--panel-border); border-radius: 18px; text-align: left; transition: background-color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
+  .schedule-time { min-width: 88px; font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 0.12em; color: var(--white); }
+  .schedule-item p { margin: 0; color: var(--text); line-height: 1.7; }
   .section-tag { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; color: rgba(42,95,168,0.15); letter-spacing: 0.05em; margin-bottom: 0.25rem; }
   .section-inner h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: 0.1em; color: var(--white); margin-bottom: 1.2rem; }
   .section-inner p { font-size: 1rem; color: var(--text-dim); font-weight: 300; line-height: 1.8; max-width: 540px; margin: 0 auto; }
@@ -102,15 +142,22 @@
     .nav-links a { padding: 0.4rem 0.7rem; font-size: 0.75rem; }
     .center-gear-container { width: 250px; height: 250px; }
     .gear-tl, .gear-tr { display: none; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .schedule-item { flex-direction: column; gap: 0.45rem; }
+    .schedule-time { min-width: auto; }
   }
 </style>
 </head>
 <body>
 
+<div class="theme-layer theme-layer-base"></div>
+<div class="theme-layer theme-layer-next"></div>
+<div class="theme-wash"></div>
+
 <nav>
   <a href="#hero" class="nav-logo">Access Stem</a>
   <div class="nav-links">
-    <a href="#section1">Our Misson</a>
+    <a href="#section1">Our Mission</a>
     <a href="#section2">Activities</a>
     <a href="#section3">Schedule</a>
     <a href="#section4">Contact</a>
@@ -146,13 +193,13 @@
           <path d="M50 4 L55.5 4 L57.5 14 Q64 16.5 69.5 20.5 L79.5 14.5 L84 19 L78 29 Q82 35 83.5 42 L93.5 44 L93.5 56 L83.5 58 Q82 65 78 71 L84 81 L79.5 85.5 L69.5 79.5 Q64 83.5 57.5 86 L55.5 96 L44.5 96 L42.5 86 Q36 83.5 30.5 79.5 L20.5 85.5 L16 81 L22 71 Q18 65 16.5 58 L6.5 56 L6.5 44 L16.5 42 Q18 35 22 29 L16 19 L20.5 14.5 L30.5 20.5 Q36 16.5 42.5 14 L44.5 4 Z M50 28 A22 22 0 1 1 50 72 A22 22 0 1 1 50 28Z" fill="#1a3560" stroke="#2a5fa8" stroke-width="0.8" fill-rule="evenodd"/>
         </svg>
         <div class="gear-inner-text">
-          <div class="motto1">Insert<br>Motto</div>
+          <div class="motto1">Learn<br>Build<br>Explore</div>
         </div>
       </div>
     </div>
     <div class="cta-block">
-      <h1>Access<br>Stem</h1>
-      <p>FillerFillerFillerFillerFiller &middot; FillerFillerFillerFillerFiller &amp; FillerFillerFillerFillerFiller</p>
+      <h1>STEM<br>For Curious Kids</h1>
+      <p>A free one-day STEM camp where students can explore, create, and solve hands-on challenges in a fun, supportive environment.</p>
       <a href="#section1" class="btn-register">Register Now</a>
     </div>
   </div>
@@ -163,19 +210,21 @@
     <h2>Our Mission</h2>
     <div class="mission-card">
       <h3>What we do</h3>
-      <p>AccessSTEM offers a completely free, one day summer camp which focuses on engaging and hands-on learning about various STEM related topics. We will be hosting a variety of design challenges which prompt students to practise problem solving in the applied sciences.</p>
+      <p>AccessSTEM is a completely free, one-day summer camp designed to make STEM feel exciting, welcoming, and hands-on. Students will take part in design challenges and creative activities that build confidence, curiosity, and problem-solving skills.</p>
     </div>
-    <div class="mission-card">
-      <h3>Who can Apply?</h3>
-      <p>Children in grades 4-5 interested in science</p>
-    </div>
-    <div class="mission-card">
-      <h3>Where is it Hosted?</h3>
-      <p>Gabriel Robins Elementary School</p>
-    </div>
-    <div class="mission-card">
-      <h3>When does it Take Place?</h3>
-      <p>June 30th, 2026</p>
+    <div class="card-grid three">
+      <div class="info-card">
+        <h3>Who can Apply?</h3>
+        <p>Children in grades 4-5 who are curious about science, building, and trying new things.</p>
+      </div>
+      <div class="info-card">
+        <h3>Where are we?</h3>
+        <p>Gabriel Robins Elementary School</p>
+      </div>
+      <div class="info-card">
+        <h3>When is it?</h3>
+        <p>June 30th, 2026</p>
+      </div>
     </div>
   </div>
 </section>
@@ -183,21 +232,56 @@
 <section id="section2" class="content-section alt">
   <div class="section-inner">
     <h2>Activities</h2>
-    <p>FillerFillerFillerFillerFiller</p>
+    <p>Each activity is hands-on, beginner-friendly, and made to keep students interested from start to finish.</p>
+    <div class="card-grid three">
+      <div class="info-card">
+        <h3>Build</h3>
+        <p>Students work in small teams to design, test, and improve creative builds using simple materials.</p>
+      </div>
+      <div class="info-card">
+        <h3>Create</h3>
+        <p>Kids explore STEM ideas through fun challenges that mix imagination, art, and problem solving.</p>
+      </div>
+      <div class="info-card">
+        <h3>Share</h3>
+        <p>Participants get to show what they made, celebrate their ideas, and learn from one another.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="section3" class="content-section">
   <div class="section-inner">
     <h2>Schedule</h2>
-    <p>FillerFillerFillerFillerFiller</p>
+    <p>A simple camp day helps students feel comfortable, stay engaged, and know what to expect.</p>
+    <div class="schedule-list">
+      <div class="schedule-item">
+        <div class="schedule-time">9:00</div>
+        <p>Welcome and check-in, with time to settle in and meet the camp team.</p>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">9:30</div>
+        <p>Hands-on STEM challenge time where students work, build, and collaborate.</p>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:00</div>
+        <p>Snack break and guided reflection so kids can recharge and share ideas.</p>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-time">11:30</div>
+        <p>Final activity, team showcase, and wrap-up celebrations before pick-up.</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="section4" class="content-section alt">
   <div class="section-inner">
     <h2>Contact</h2>
-    <p>FillerFillerFillerFillerFiller</p>
+    <div class="mission-card">
+      <h3>Ready to join?</h3>
+      <p>Register through the form linked above to save a spot. If you are a parent with questions, the registration form is the best place to start so the team can follow up with the details you need.</p>
+    </div>
   </div>
 </section>
 
