@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Access Stem</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d1e34;
+    --bg-soft: #15294a;
+    --accent: #67a8ff;
+    --accent-2: #9dd6ff;
+    --text: #edf5ff;
+    --text-dim: #bfd3eb;
+    --panel: rgba(255,255,255,0.08);
+    --panel-border: rgba(121,179,255,0.18);
+    --shadow: 0 24px 70px rgba(0,0,0,0.28);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Barlow', sans-serif;
+    background:
+      radial-gradient(circle at 12% 12%, rgba(103,168,255,0.24) 0%, rgba(103,168,255,0) 28%),
+      radial-gradient(circle at 82% 14%, rgba(157,214,255,0.18) 0%, rgba(157,214,255,0) 22%),
+      linear-gradient(145deg, #081320 0%, #0d1e34 40%, #17325a 100%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .page-shell {
+    position: relative;
+    min-height: 100vh;
+    padding: 1.25rem 1.2rem 3.5rem;
+  }
+
+  .page-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(111, 173, 255, 0.18) 0%, rgba(111, 173, 255, 0) 34%),
+      radial-gradient(circle at 85% 25%, rgba(140, 215, 255, 0.14) 0%, rgba(140, 215, 255, 0) 28%);
+    opacity: 0.9;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+    width: min(1180px, calc(100% - 1rem));
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.95rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    background: rgba(5, 13, 24, 0.68);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .brand h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.14em;
+    font-size: 1.55rem;
+    line-height: 1;
+  }
+
+  .brand p {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .button,
+  .button-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.35rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .button {
+    color: #07111f;
+    background: linear-gradient(135deg, #ffffff 0%, #dfefff 100%);
+    box-shadow: 0 14px 30px rgba(255,255,255,0.08);
+  }
+
+  .button:hover,
+  .button-ghost:hover {
+    transform: translateY(-2px);
+  }
+
+  .button-ghost {
+    color: var(--text);
+    background: rgba(103,168,255,0.16);
+    border: 1px solid rgba(157,214,255,0.28);
+  }
+
+  .hero {
+    width: min(1180px, calc(100% - 1rem));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 1.4rem;
+    align-items: stretch;
+  }
+
+  .hero-copy,
+  .hero-panel,
+  .section-title,
+  .member-card,
+  .story-card,
+  .quote-card,
+  .footer-cta {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-copy {
+    padding: clamp(1.5rem, 3vw, 2.4rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.06);
+    color: var(--accent-2);
+    letter-spacing: 0.15em;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 5.4rem);
+    line-height: 0.93;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-copy p {
+    max-width: 60ch;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+  }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    margin-top: 1.5rem;
+  }
+
+  .meta-card,
+  .info-card,
+  .story-card,
+  .quote-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    background: rgba(5, 13, 24, 0.26);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  }
+
+  .meta-card {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .meta-card strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.35rem;
+    color: var(--text);
+  }
+
+  .meta-card span {
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .hero-panel {
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .hero-panel h3,
+  .section-title h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.65rem;
+  }
+
+  .hero-panel p,
+  .section-title p,
+  .story-card p,
+  .quote-card p,
+  .member-bio p,
+  .footer-cta p {
+    color: var(--text-dim);
+    line-height: 1.8;
+    font-size: 0.98rem;
+  }
+
+  .role-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .role-chip {
+    padding: 0.8rem 0.9rem;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.09);
+  }
+
+  .role-chip strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+
+  .role-chip span {
+    display: block;
+    color: var(--text-dim);
+    line-height: 1.55;
+  }
+
+  .section {
+    width: min(1180px, calc(100% - 1rem));
+    margin: 1.4rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .story-card {
+    grid-column: span 7;
+    padding: 1.5rem;
+  }
+
+  .story-card h3,
+  .info-card h3,
+  .quote-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.9rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.85rem;
+  }
+
+  .section-title {
+    width: min(1180px, calc(100% - 1rem));
+    margin: 1.4rem auto 0;
+    padding: 1.8rem;
+  }
+
+  .section-title p {
+    max-width: 70ch;
+  }
+
+  .team-grid {
+    width: min(1180px, calc(100% - 1rem));
+    margin: 1.4rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+
+  .member-card {
+    display: grid;
+    grid-template-columns: 288px 1fr;
+    gap: 1.4rem;
+    overflow: hidden;
+    padding: 1.4rem;
+  }
+
+  .member-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+  }
+
+  .member-bio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .member-bio small {
+    display: inline-block;
+    color: var(--accent-2);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+  }
+
+  .member-bio h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.85rem;
+    line-height: 1;
+    letter-spacing: 0.12em;
+  }
+
+  .member-bio p + p {
+    margin-top: 0.1rem;
+  }
+
+  .quote-card strong {
+    display: block;
+    margin-top: 1rem;
+    color: var(--text);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+  }
+
+  .footer-cta {
+    width: min(1180px, calc(100% - 1rem));
+    margin: 1rem auto 0;
+    padding: 1.4rem;
+    border-radius: 26px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(135deg, rgba(103,168,255,0.16) 0%, rgba(13, 30, 52, 0.8) 100%);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-cta h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+
+  .footer-cta p {
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+
+  @media (max-width: 900px) {
+    .hero,
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-meta,
+    .role-list {
+      grid-template-columns: 1fr;
+    }
+
+    .member-card {
+      grid-template-columns: 1fr;
+    }
+
+    .topbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .topbar-actions,
+    .footer-cta {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .page-shell { padding-inline: 0.6rem; }
+    .hero-copy h2 { font-size: clamp(2.6rem, 13vw, 4rem); }
+    .button,
+    .button-ghost {
+      width: 100%;
+    }
+    .topbar-actions {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand">
+        <h1>Access Stem</h1>
+        <p>About Us</p>
+      </div>
+      <div class="topbar-actions">
+        <a class="button-ghost" href="index.html">Back Home</a>
+        <a class="button" href="https://docs.google.com/forms/d/e/1FAIpQLSczDBYO7E8h-TQ7aPEgvIJ86zmoRXWiC1f-zFq4qKA8Um7DFQ/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Register Now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <h2>About Access STEM</h2>
+
+          <div class="hero-meta">
+            <div class="meta-card">
+              <strong>8 members</strong>
+              <span>Each team member is friendly, energetic, and focused on making STEM accessible.</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <div>
+            <h3>Access STEM's team</h3>
+          </div>
+          <div class="role-list">
+            <div class="role-chip"><strong>Outreach</strong><span>Daniel Soloshchenko</span></div>
+            <div class="role-chip"><strong>Stations</strong><span>Alexa Chelishev, Ian Kim</span></div>
+            <div class="role-chip"><strong>Design</strong><span>Elio Chen</span></div>
+            <div class="role-chip"><strong>Leadership</strong><span>Hanna Yoo</span></div>
+            <div class="role-chip"><strong>Registration Process</strong><span>Justin Yuan, Brian Han</span></div>
+            <div class="role-chip"><strong>Social Media Manager</strong><span>Prabhnoor Multani</span></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section-title">
+        <h3>Meet the Team</h3>
+        <p>
+          The AccessSTEM team is made up of 8 passionate and dedicated high school students from R.E. Mountain Secondary School. Each member brings their own unique skills, experiences, and enthusiasm for STEM education, and we're all committed to creating a fun, welcoming, and inclusive environment for our campers. Whether it's leading stations, designing activities, managing outreach, or supporting the registration process, every team member plays an important role in making AccessSTEM a success. We can't wait to share our love of STEM with our campers and help them discover new interests and make lasting friendships!
+        </p>
+      </section>
+
+      <section class="team-grid">
+        <article class="member-card">
+          <img src="about-assets/page1_img1.jpeg" alt="Daniel Soloshchenko portrait">
+          <div class="member-bio">
+            <small>Outreach & Materials Lead</small>
+            <h3>Daniel Soloshchenko</h3>
+            <p>Hi! I'm Daniel, a Grade 11 IB student at R.E. Mountain Secondary School.</p>
+            <p>I've always loved figuring out how things work, whether it's cars, airplanes, robots, or anything mechanical. As President of our Robotics Club and a Senior Executive of the Debate Club, I enjoy solving problems and helping others learn new skills.</p>
+            <p>Growing up with four younger siblings has given me lots of experience working with kids (and plenty of patience!). Over the years, I've loved introducing them to science and helping them explore their interests. I also have two years of professional cooking experience and hold a FoodSafe Certification. At AccessSTEM, I'm excited to create fun activities and help campers discover that STEM can be exciting, creative, and accessible to everyone.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page1_img2.jpeg" alt="Alexa Chelishev portrait">
+          <div class="member-bio">
+            <small>Stations Lead</small>
+            <h3>Alexa Chelishev</h3>
+            <p>Hi, I'm Alexa! I'm a Grade 11 IB student at R.E. Mountain Secondary School who loves STEM, hands-on projects, and working with younger students.</p>
+            <p>Through two years in Reading Buddies and community volunteering, I've had the opportunity to help children build confidence and develop new skills. I enjoy building things, solving challenges, and finding creative ways to learn.</p>
+            <p>Outside of STEM, I'm a huge DC fan (and yes, I still think DC is better than Marvel!). I love seeing kids get excited about discovering something new, and I can't wait to help create a welcoming environment where every camper feels encouraged to participate and have fun.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page2_img1.png" alt="Elio Chen portrait">
+          <div class="member-bio">
+            <small>Design Challenges Lead</small>
+            <h3>Elio Chen</h3>
+            <p>Hello! I'm Elio, a Grade 11 IB student at R.E. Mountain Secondary School.</p>
+            <p>I've always enjoyed STEM because it encourages creativity, teamwork, and problem-solving. Through helping younger students with homework and participating in buddy programs, I've learned how rewarding it can be to support children as they learn and grow.</p>
+            <p>I'm currently taking Physics HL and have also developed leadership and communication skills through drama and ensemble activities. When I'm not studying, you'll probably find me spending time with cats or working on a new project. I joined AccessSTEM because I want to help young students discover interests beyond screens and experience the fun of building, creating, and exploring new ideas.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page2_img2.jpeg" alt="Hanna Yoo portrait">
+          <div class="member-bio">
+            <small>Camp Director</small>
+            <h3>Hanna Yoo</h3>
+            <p>Hi! I'm Hanna, a Grade 11 IB student at R.E. Mountain Secondary School and the founder of AccessSTEM.</p>
+            <p>I've always been passionate about STEM and believe that every child should have the opportunity to explore science, technology, engineering, and math in a supportive environment. I've worked with children as a camp counselor at an English camp in Japan for students in Grades 3-5 and as a classroom mentor.</p>
+            <p>I'm CPR certified, FoodSafe certified, and involved in both Robotics and Physics club. I also have a bunny named Boba! I started AccessSTEM because I wanted to create a camp where every child feels welcome, regardless of their background or experience level. My goal is to help students build confidence, make new friends, and discover that STEM is for everyone, not just a certain type of person.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page3_img1.jpeg" alt="Prabhnoor Multani portrait">
+          <div class="member-bio">
+            <small>Social Media Manager</small>
+            <h3>Prabhnoor Multani</h3>
+            <p>Hi! I'm Prabhnoor, a Grade 11 IB student at R.E. Mountain Secondary School.</p>
+            <p>I've always enjoyed working with younger students, whether that's as a Link Crew Leader, helping my younger cousins, or volunteering at school events. I'm First Aid certified and currently serve as the Head Marketer for Supporting Global Education (SGE).</p>
+            <p>Outside of school, I love playing the trombone and getting involved in my community. What excites me most about AccessSTEM is the opportunity to help make STEM accessible to every child. I believe that curiosity and creativity should never be limited by financial barriers, and I'm excited to help create a fun, welcoming experience where every camper feels included and supported.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page3_img2.jpeg" alt="Ian Kim portrait">
+          <div class="member-bio">
+            <small>Stations Lead</small>
+            <h3>Ian Kim</h3>
+            <p>Hi! I'm Ian, a Grade 11 IB student at R.E. Mountain Secondary School with a passion for STEM, problem-solving, and working with younger students.</p>
+            <p>Through my experience as a summer camp instructor with SFU and UBC programs, an assistant tutor, and a debate instructor for the past four years, I've had the opportunity to help students build confidence, develop new skills, and enjoy learning. At school, I'm the President of the Physics Club and Vice President of the Debate Club.</p>
+            <p>I enjoy exploring math and science through courses such as AP Calculus and IB Higher Level Math, Chemistry, and Physics. Having spent years mentoring students and growing up with a younger brother, I've learned the importance of patience, encouragement, and making learning fun. I joined AccessSTEM because I love sharing my interest in STEM with others and helping young students discover that science and technology can be exciting, creative, and accessible to everyone. I can't wait to meet our campers this summer!</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page4_img1.png" alt="Justin Yuan portrait">
+          <div class="member-bio">
+            <small>Registration Lead</small>
+            <h3>Justin Yuan</h3>
+            <p>Hi! I'm Justin, a Grade 11 IB student at R.E. Mountain Secondary School with an interest in technology, computers, and coding.</p>
+            <p>I enjoy exploring STEM through computer science and programming and am always looking for opportunities to learn new skills and solve problems. Growing up with a younger sibling has given me plenty of experience being patient, responsible, and helping others when they need support.</p>
+            <p>At school, I study Higher Level Chemistry and Standard Level Physics, and I enjoy seeing how STEM concepts connect to real-world technology. As part of the AccessSTEM team, I'm excited to help create a welcoming and organized experience for campers and their families. I hope to show students that STEM can be fun, approachable, and something everyone can enjoy exploring.</p>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <img src="about-assets/page4_img2.jpeg" alt="Brian portrait">
+          <div class="member-bio">
+            <small>Programmer & Mentor</small>
+            <h3>Brian</h3>
+            <p>Hi! I'm Brian, a Grade 11 IB student at R.E. Mountain Secondary School with a passion for engineering, programming, and technology.</p>
+            <p>I enjoy working on coding projects, particularly in Java, and have experience with PCB design and robotics. At school, I serve as President of the Robotics Club and love finding creative ways to use technology to solve problems.</p>
+            <p>I've also volunteered at a UBC Physics Summer Camp, where I had the opportunity to work with younger students and help make STEM learning engaging and enjoyable. Outside of STEM, I enjoy long-distance running and challenging myself to reach new goals. I joined AccessSTEM because I believe every student should have the opportunity to explore STEM, regardless of their financial situation. I'm excited to help create a fun, supportive environment where campers can build confidence, make friends, and discover new interests.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="footer-cta">
+        <div>
+          <h3>About page built from the PDF</h3>
+          <p>The original photos are in place, the bios are preserved, and the page is now formatted for easier reading on desktop and mobile.</p>
+        </div>
+        <a class="button" href="index.html">Back Home</a>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
