@@ -98,6 +98,13 @@
   .cta-block { text-align: center; }
   .cta-block h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 6vw, 5rem); letter-spacing: 0.1em; color: var(--white); line-height: 1; margin-bottom: 0.6rem; }
   .cta-block p { font-size: 0.92rem; color: var(--text-dim); font-weight: 300; letter-spacing: 0.04em; margin-bottom: 1.8rem; }
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
   .btn-register {
     display: inline-block; background: var(--white); color: var(--bg);
     font-family: 'Barlow', sans-serif; font-size: 0.82rem; font-weight: 700;
@@ -108,6 +115,28 @@
   }
   .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.18); }
   .btn-register:active { transform: scale(0.97); }
+  .btn-about {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: linear-gradient(135deg, var(--accent) 0%, #67a8ff 100%);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.88rem 2.35rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    box-shadow: 0 14px 34px rgba(32, 87, 154, 0.32);
+  }
+  .btn-about:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 18px 38px rgba(32, 87, 154, 0.42); }
+  .btn-about:active { transform: scale(0.98); }
   .cta-block h1, .cta-block p, .gear-inner-text .motto1, .section-inner h2, .section-inner p, .mission-card h3, .mission-card p, .info-card h3, .info-card p, .schedule-time, .schedule-item p { transition: color 0.7s ease; }
 
   .hero-inner { display: flex; align-items: center; gap: 5vw; z-index: 2; position: relative; flex-wrap: wrap; justify-content: center; padding: 2rem; }
@@ -145,6 +174,8 @@
     .card-grid.three { grid-template-columns: 1fr; }
     .schedule-item { flex-direction: column; gap: 0.45rem; }
     .schedule-time { min-width: auto; }
+    .cta-actions { gap: 0.7rem; }
+    .btn-register, .btn-about { width: 100%; max-width: 290px; }
   }
 </style>
 </head>
@@ -160,7 +191,7 @@
     <a href="#section1">Our Mission</a>
     <a href="#section2">Activities</a>
     <a href="#section3">Schedule</a>
-    <a href="#section4">Contact</a>
+    <a href="#section4">Contacts</a>
   </div>
 </nav>
 
@@ -200,7 +231,10 @@
     <div class="cta-block">
       <h1>STEM<br>For Curious Kids</h1>
       <p>A free one-day STEM camp where students can explore, create, and solve hands-on challenges in a fun, supportive environment.</p>
-      <a href="#section1" class="btn-register">Register Now</a>
+      <div class="cta-actions">
+        <a href="about.html" class="btn-about">About Us</a>
+        <a href="#section1" class="btn-register">Register Now</a>
+      </div>
     </div>
   </div>
 </section>
@@ -306,7 +340,7 @@
 
 <section id="section4" class="content-section alt">
   <div class="section-inner">
-    <h2>Contact</h2>
+    <h2>Contacts</h2>
     <div class="mission-card">
       <h3>Ready to join?</h3>
       <p>Register through the form linked above to save a spot. If you are a parent with questions, the registration form is the best place to start so the team can follow up with the details you need.</p>
@@ -315,8 +349,5 @@
 </section>
 
   <script src="script.js"></script>
-</body>
-</html>
-
 </body>
 </html>
